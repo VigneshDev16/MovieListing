@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "DGtest",
+    "slug": "DGtest",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "DGtest"
+}
