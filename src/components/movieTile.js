@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, Dimensions, Image } from "react-native";
-import { DeviceHeight, DeviceWidth, numColumns } from "../utils";
+import { DeviceHeight, DeviceWidth, ios, numColumns } from "../utils";
 import { imageList } from "../assets/images";
 
 export default function MovieTile({ item, index }) {
@@ -27,13 +27,11 @@ export default function MovieTile({ item, index }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginVertical: 20,
   },
   item: {
-    // backgroundColor: '#4D243D',
     flex: 1,
     marginHorizontal: 7,
-    marginBottom: 30,
+    marginBottom: ios ? 30 : 40,
     height: (DeviceHeight / numColumns) * 0.8, // approximate a square
   },
   itemInvisible: {
@@ -49,6 +47,7 @@ const styles = StyleSheet.create({
     textAlign: "left",
     fontFamily: "light",
     flexWrap: "wrap",
-    marginTop: -10,
+    marginTop: -15,
+    fontSize:18
   },
 });

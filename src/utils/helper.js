@@ -1,9 +1,11 @@
-import { Dimensions, Image, View } from "react-native";
+import { Dimensions, Image, Platform, View } from "react-native";
 
 export const numColumns = 3;
 
 export const DeviceWidth = Dimensions.get("window").width
 export const DeviceHeight = Dimensions.get("window").height
+
+export const ios = Platform.OS == 'ios';
 
 export const formatListData = (data, numColumns) => {
     const numberOfFullRows = Math.floor(data.length / numColumns);

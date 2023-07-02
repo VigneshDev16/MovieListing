@@ -1,11 +1,18 @@
-import React from 'react'
+import React from "react";
 import { Image, TextInput, View } from "react-native";
-import SearchIcon from "../assets/images/search.png"
+import SearchIcon from "../assets/images/search.png";
 
-
-export const SearchBar = ({onSearch}) => {
+export const SearchBar = ({ onSearch }) => {
   return (
-    <View style={{ flexDirection: "row" }}>
+    <View
+      style={{
+        zIndex: 200,
+        flexDirection: "row",
+        borderRadius: 10,
+        backgroundColor: "white",
+        margin: 10,
+      }}
+    >
       <TextInput
         style={{
           height: 40,
@@ -16,7 +23,7 @@ export const SearchBar = ({onSearch}) => {
         }}
         underlineColorAndroid="transparent"
         placeholder="Search"
-        onChangeText = {onSearch}
+        onChangeText={onSearch}
       ></TextInput>
       <Image
         source={SearchIcon}
