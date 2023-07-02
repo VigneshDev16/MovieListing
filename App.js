@@ -1,15 +1,15 @@
-import React, { useLayoutEffect,useEffect } from "react";
+import React, { useLayoutEffect, useEffect } from "react";
 import { useFonts } from "expo-font";
 import { fonts } from "./src/utils";
-import MovieList from "./src/screens/movieList";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as SplashScreen from "expo-splash-screen";
+import MovieList from "./src/screens/movieList/movieListScreen";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [loaded,error] = useFonts(fonts);
+  const [loaded, error] = useFonts(fonts);
 
   useEffect(() => {
     async function prepare() {
@@ -19,9 +19,9 @@ export default function App() {
     prepare();
   }, []);
 
-  useLayoutEffect( () => {
+  useLayoutEffect(() => {
     if (loaded) {
-       SplashScreen.hideAsync();
+      SplashScreen.hideAsync();
     }
   }, [loaded]);
 
@@ -31,10 +31,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
-          name="Romantic Comedy"
-          component={MovieList}
-        />
+        <Stack.Screen name="Romantic Comedy" component={MovieList} />
       </Stack.Navigator>
     </NavigationContainer>
   );

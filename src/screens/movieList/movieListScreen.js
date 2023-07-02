@@ -1,7 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import {
-  StyleSheet,
   Text,
   View,
   FlatList,
@@ -10,19 +9,18 @@ import {
   SafeAreaView,
 } from "react-native";
 import {
-  DeviceWidth,
   formatListData,
   getData,
-  ios,
   numColumns,
-} from "../utils";
-import MovieTile from "../components/movieTile";
+} from "../../utils";
+import MovieTile from "../../components/movieTile";
 import { useNavigation } from "@react-navigation/native";
-import BackIcon from "../assets/images/Back.png";
-import HeaderBg from "../assets/images/nav_bar.png";
-import SearchIcon from "../assets/images/search.png";
-import CloseIcon from "../assets/images/close.png";
-import { SearchBar } from "../components/searchBar";
+import BackIcon from "../../assets/images/Back.png";
+import HeaderBg from "../../assets/images/nav_bar.png";
+import SearchIcon from "../../assets/images/search.png";
+import CloseIcon from "../../assets/images/close.png";
+import { SearchBar } from "../../components/searchBar";
+import { styles } from "./movieListScreen.styles";
 
 export default function MovieList() {
   const [data, setdata] = useState([]); // state assigned to listview
@@ -97,7 +95,7 @@ export default function MovieList() {
     <SafeAreaView style={styles.container}>
       <StatusBar style="light" />
       <Image source={HeaderBg} style={styles.headerShadow} /> 
-      {showSearch && <SearchBar onSearch={onSearch} />} // Search Bar componenjt
+      {showSearch && <SearchBar onSearch={onSearch} />}
       <FlatList
         data={formatListData(data, numColumns)} //formatting list data with empty cells so last row item's design won't be collapsed
         style={styles.listView}
@@ -109,31 +107,3 @@ export default function MovieList() {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: { flex: 1, paddingTop: ios ? 50 : 80, backgroundColor: "black" },
-  listView: {
-    flex: 1,
-  },
-  headerShadow: {
-    zIndex: 100,
-    position: "absolute",
-    top: ios ? 50 : 30,
-    resizeMode: "stretch",
-    height: 80,
-    width: DeviceWidth,
-  },
-  searchIcon: {
-    resizeMode: "contain",
-    height: 30,
-    width: 20,
-    tintColor: "white",
-  },
-  backIcon: { resizeMode: "contain", height: 30, width: 20 },
-  headerTitle: {
-    color: "white",
-    fontFamily: "light",
-    fontSize: 24,
-  },
-  headerTitleContainer:{ flex: 1, paddingLeft: 10, backgroundColor: "transparent" }
-});
