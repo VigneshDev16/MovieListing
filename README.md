@@ -39,3 +39,11 @@
 - `Movie Listing`: Gets data from API and lists it
 - `Lazy Loading`: Loads next set of data whenever scroll reaches end of current set of data
 - `Search`: Implemented client side search and also implemented debouncer to reduce number of calls
+
+
+## App Recording
+
+
+
+https://github.com/vickyms008/MovieListing/assets/11178009/1a6819fb-7c71-4fdb-b693-17814a8344af
+
