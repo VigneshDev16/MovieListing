@@ -1,6 +1,6 @@
 import React from "react";
-import { StyleSheet, Text, View, Dimensions, Image } from "react-native";
-import { DeviceHeight, DeviceWidth, ios, numColumns } from "../utils";
+import { StyleSheet, Text, View, Image } from "react-native";
+import { DeviceHeight, ios, numColumns } from "../utils";
 import { imageList } from "../assets/images";
 
 export default function MovieTile({ item, index }) {
