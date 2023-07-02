@@ -1,28 +1,41 @@
-import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useLayoutEffect,useEffect } from "react";
 import { useFonts } from "expo-font";
 import { fonts } from "./src/utils";
-import AppLoading from "expo-app-loading";
+import MovieList from "./src/screens/movieList";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import * as SplashScreen from "expo-splash-screen";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [isLoaded] = useFonts(fonts);
-  if (!isLoaded) return <AppLoading />;
+  const [loaded,error] = useFonts(fonts);
+
+  useEffect(() => {
+    async function prepare() {
+      await SplashScreen.preventAutoHideAsync();
+    }
+
+    prepare();
+  }, []);
+
+  useLayoutEffect( () => {
+    if (loaded) {
+       SplashScreen.hideAsync();
+    }
+  }, [loaded]);
+
+  if (!loaded) {
+    return null;
+  }
   return (
-    <View style={styles.container}>
-      <Text style={{ fontFamily: "boldFont" }}>
-        Open up App.js to start working on your app!
-      </Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Romantic Comedy"
+          component={MovieList}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
