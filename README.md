@@ -33,3 +33,9 @@
     - `helper`: File contains constants, helper functions such as isIos, DeviceDimensions
   - `App.js`: Main component that starts your whole app.
   - `index.js`: Entry point of your application as per React-Native standards.
+
+## App Features
+
+- `Movie Listing`: Gets data from API and lists it
+- `Lazy Loading`: Loads next set of data whenever scroll reaches end of current set of data
+- `Search`: Implemented client side search and also implemented debouncer to reduce number of calls
