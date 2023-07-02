@@ -6,8 +6,8 @@ import { imageList } from "../assets/images";
 export default function MovieTile({ item, index }) {
   let imageUrl = imageList["placeHolder"];
 
-  if (item.empty === true) {
-    return <View style={[styles.item, styles.itemInvisible]} />;
+  if (item.empty === true) { // rendering empty cells whenever cells in last row us less than numColumns
+    return <View style={[styles.item, styles.itemInvisible]} />; 
   } else {
     imageUrl = item["poster-image"]
       ? imageList[item["poster-image"]] ?? imageList["placeHolder"]
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 7,
     marginBottom: ios ? 30 : 40,
-    height: (DeviceHeight / numColumns) * 0.8, // approximate a square
+    height: (DeviceHeight / numColumns) * 0.8,
   },
   itemInvisible: {
     backgroundColor: "transparent",

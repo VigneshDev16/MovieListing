@@ -25,12 +25,13 @@ import CloseIcon from "../assets/images/close.png";
 import { SearchBar } from "../components/searchBar";
 
 export default function MovieList() {
-  const [data, setdata] = useState([]);
-  const [currData, setCurrData] = useState([]);
-  const [page, setPage] = useState(0);
+  const [data, setdata] = useState([]); // state assigned to listview
+  const [currData, setCurrData] = useState([]); // state used too maintain original data
+  const [page, setPage] = useState(0); // state used to maintain page number
   const [showSearch, setShowSearch] = useState(false);
   const navigation = useNavigation();
 
+  // Adding Page as dependency - so whenever page updates it'll fetch next set of data and concat it
   useEffect(() => {
     let res = getData(page);
     if (res) {
@@ -65,7 +66,7 @@ export default function MovieList() {
         return (
           <TouchableOpacity
             onPress={() => {
-              if (showSearch) setdata(currData);
+              if (showSearch) setdata(currData); // whenever search is closed , search results will be replaced with original data
               setShowSearch((currVal) => !currVal);
             }}
           >
@@ -79,6 +80,7 @@ export default function MovieList() {
     };
   };
 
+  // method filters data from original data list and assigned it to listview data
   const onSearch = (searchKey) => {
     setTimeout(() => {
       if (searchKey) {
@@ -90,19 +92,19 @@ export default function MovieList() {
       } else setdata(currData);
     }, 500);
   };
-  
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="light" />
-      <Image source={HeaderBg} style={styles.headerShadow} />
-      {showSearch && <SearchBar onSearch={onSearch} />}
+      <Image source={HeaderBg} style={styles.headerShadow} /> 
+      {showSearch && <SearchBar onSearch={onSearch} />} // Search Bar componenjt
       <FlatList
-        data={formatListData(data, numColumns)}
+        data={formatListData(data, numColumns)} //formatting list data with empty cells so last row item's design won't be collapsed
         style={styles.listView}
-        renderItem={MovieTile}
+        renderItem={MovieTile} // renders each movie thumbnail 
         numColumns={numColumns}
-        onEndReached={() => setPage(page + 1)}
-        onEndReachedThreshold={0.7}
+        onEndReached={() => setPage(page + 1)} // whenever list is scrolled to 70%, it'll update pagenumber which inturn call next set of data
+        onEndReachedThreshold={0.7} // Lazy load triggers at 70% scroll
       />
     </SafeAreaView>
   );
