@@ -5,5 +5,10 @@
     "version": "1.0.0",
     "assetBundlePatterns": ["**/*"]
   },
-  "name": "DGtest"
+  "name": "DGtest",
+  "splash": {
+    "image": "./src/assets/images/splashScreen.png",
+    "resizeMode": "cover",
+    "backgroundColor": "#000000"
+  }
 }

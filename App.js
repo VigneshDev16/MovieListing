@@ -1,12 +1,8 @@
 import React, { useLayoutEffect, useEffect } from "react";
 import { useFonts } from "expo-font";
 import { fonts } from "./src/utils";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as SplashScreen from "expo-splash-screen";
-import MovieList from "./src/screens/movieList/movieListScreen";
-
-const Stack = createNativeStackNavigator();
+import Navigation from "./src/utils/navigation";
 
 export default function App() {
   const [loaded, error] = useFonts(fonts);
@@ -21,7 +17,9 @@ export default function App() {
 
   useLayoutEffect(() => {
     if (loaded) {
-      SplashScreen.hideAsync();
+      setTimeout(() => {
+        SplashScreen.hideAsync();
+      }, 2000);
     }
   }, [loaded]);
 
@@ -29,10 +27,6 @@ export default function App() {
     return null;
   }
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Romantic Comedy" component={MovieList} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Navigation/>
   );
 }

@@ -7,12 +7,10 @@ import {
   Image,
   TouchableOpacity,
   SafeAreaView,
+  Alert,
+  BackHandler,
 } from "react-native";
-import {
-  formatListData,
-  getData,
-  numColumns,
-} from "../../utils";
+import { formatListData, getData, numColumns } from "../../utils";
 import MovieTile from "../../components/movieTile";
 import { useNavigation } from "@react-navigation/native";
 import BackIcon from "../../assets/images/Back.png";
@@ -45,20 +43,32 @@ export default function MovieList() {
     navigation.setOptions(getNavBar());
   }, [navigation, showSearch]);
 
-
   const getNavBar = () => {
     return {
       title: "Romantic Comedy",
       headerTransparent: true,
       headerTitle: (props) => (
-        <View
-          style={styles.headerTitleContainer}
-        >
+        <View style={styles.headerTitleContainer}>
           <Text style={styles.headerTitle}>{props.children}</Text>
         </View>
       ),
       headerLeft: () => {
-        return <Image source={BackIcon} style={styles.backIcon} />;
+        return (
+          <TouchableOpacity
+            onPress={() => navigation.goBack()
+              // Alert.alert("Exit App", "Do you want to exit?", [
+              //   {
+              //     text: "No",
+              //     onPress: () => console.log("Cancel Pressed"),
+              //     style: "cancel",
+              //   },
+              //   { text: "Yes", onPress: () => BackHandler.exitApp() },
+              // ])
+            }
+          >
+            <Image source={BackIcon} style={styles.backIcon} />
+          </TouchableOpacity>
+        );
       },
       headerRight: () => {
         return (
@@ -94,12 +104,12 @@ export default function MovieList() {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="light" />
-      <Image source={HeaderBg} style={styles.headerShadow} /> 
+      <Image source={HeaderBg} style={styles.headerShadow} />
       {showSearch && <SearchBar onSearch={onSearch} />}
       <FlatList
         data={formatListData(data, numColumns)} //formatting list data with empty cells so last row item's design won't be collapsed
         style={styles.listView}
-        renderItem={MovieTile} // renders each movie thumbnail 
+        renderItem={MovieTile} // renders each movie thumbnail
         numColumns={numColumns}
         onEndReached={() => setPage(page + 1)} // whenever list is scrolled to 70%, it'll update pagenumber which inturn call next set of data
         onEndReachedThreshold={0.7} // Lazy load triggers at 70% scroll
