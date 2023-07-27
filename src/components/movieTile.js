@@ -1,13 +1,13 @@
 import React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import { DeviceHeight, ios, numColumns } from "../utils";
 import { imageList } from "../assets/images";
 
-export default function MovieTile({ item, index }) {
+const MovieTile = ({ item, index, navigation }) => {
   let imageUrl = imageList["placeHolder"];
-
-  if (item.empty === true) { // rendering empty cells whenever cells in last row us less than numColumns
-    return <View style={[styles.item, styles.itemInvisible]} />; 
+  if (item.empty === true) {
+    // rendering empty cells whenever cells in last row us less than numColumns
+    return <View style={[styles.item, styles.itemInvisible]} />;
   } else {
     imageUrl = item["poster-image"]
       ? imageList[item["poster-image"]] ?? imageList["placeHolder"]
@@ -15,14 +15,19 @@ export default function MovieTile({ item, index }) {
   }
 
   return (
-    <View style={styles.item}>
+    <TouchableOpacity
+      style={styles.item}
+      onPress={() => navigation.navigate("MovieDetails",{itemData : item})}
+    >
       <Image source={imageUrl} style={styles.itemImage} />
       <Text style={styles.itemText} numberOfLines={1}>
         {item?.name}
       </Text>
-    </View>
+    </TouchableOpacity>
   );
-}
+};
+
+export default MovieTile;
 
 const styles = StyleSheet.create({
   container: {
@@ -48,6 +53,6 @@ const styles = StyleSheet.create({
     fontFamily: "light",
     flexWrap: "wrap",
     marginTop: -15,
-    fontSize:18
+    fontSize: 18,
   },
 });

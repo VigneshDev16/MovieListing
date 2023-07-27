@@ -109,7 +109,7 @@ export default function MovieList() {
       <FlatList
         data={formatListData(data, numColumns)} //formatting list data with empty cells so last row item's design won't be collapsed
         style={styles.listView}
-        renderItem={MovieTile} // renders each movie thumbnail
+        renderItem={({ item, index }) => MovieTile({ item, index, navigation })} // renders each movie thumbnail
         numColumns={numColumns}
         onEndReached={() => setPage(page + 1)} // whenever list is scrolled to 70%, it'll update pagenumber which inturn call next set of data
         onEndReachedThreshold={0.7} // Lazy load triggers at 70% scroll
